@@ -17,13 +17,12 @@ Dashboard widget plugin for real-time network bandwidth monitoring.
 ```text
 .
 ├── CMakeLists.txt
-└── widgets/
-    ├── CMakeLists.txt
-    └── bandwidth-monitor/
-        ├── CMakeLists.txt
-        ├── BandwidthMonitorWidget.h
-        ├── BandwidthMonitorWidget.cpp
-        └── bandwidth-monitor.json
+├── BandwidthMonitorWidget.h
+├── BandwidthMonitorWidget.cpp
+├── bandwidth-monitor.json
+├── README.md
+├── LICENSE
+└── .github/
 ```
 
 ## Build
