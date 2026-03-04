@@ -1,2 +1,78 @@
-# bandwidth-monitor
-Dashboard widget plugin for real-time network bandwidth monitoring
+# Bandwidth Monitor Widget
+
+Dashboard widget plugin for real-time network bandwidth monitoring.
+
+## Features
+
+- Displays **download** and **upload** throughput
+- Samples counters every second
+- Interface selector (e.g. `eth0`, `wlan0`)
+- Persists selected interface across restarts (`serialize` / `deserialize`)
+- Graceful fallback:
+  - Non-Linux: shows an informative unsupported-platform message
+  - Linux with no active interfaces: shows `N/A`
+
+## Repository Layout
+
+```text
+.
+├── CMakeLists.txt
+├── BandwidthMonitorWidget.h
+├── BandwidthMonitorWidget.cpp
+├── bandwidth-monitor.json
+├── README.md
+├── LICENSE
+└── .github/
+```
+
+## Build
+
+Linux build deps (Debian/Ubuntu):
+
+```bash
+sudo apt update
+sudo apt install -y cmake ninja-build qt6-base-dev libxkbcommon-dev libxkbcommon-x11-dev libvulkan-dev
+```
+
+This plugin expects the Dashboard widget SDK target (`widget-sdk`).
+
+### Option A: Build as part of Dashboard (recommended)
+
+Add this repo to your Dashboard tree and include it from parent CMake, ensuring `widget-sdk` is already available.
+
+### Option B: Standalone build (with discoverable `widget-sdk` package)
+
+```bash
+cmake -S . -B build
+cmake --build build --parallel
+```
+
+If `widget-sdk` is not installed in a default CMake search location, provide its prefix via `CMAKE_PREFIX_PATH`.
+
+The plugin output is written to:
+
+```text
+build/plugins/
+```
+
+## Install / Usage
+
+1. Build the plugin.
+2. Copy **only** the resulting shared library into Dashboard's runtime plugin directory (next to the Dashboard binary):
+   - Linux: `.../dashboard/plugins/libbandwidth-monitor-widget.so`
+   - Do **not** copy `bandwidth-monitor.json` into the runtime plugin directory.
+3. Launch Dashboard.
+4. Open **Add Widget** → choose **Bandwidth Monitor**.
+5. Select a network interface from the dropdown.
+
+## Troubleshooting
+
+- Error: `Failed to load plugin ... bandwidth-monitor.json is not an ELF object (file too small)`
+  - Cause: a stray `*.json` file was placed in `dashboard/plugins` and the loader attempted to open it as a shared library.
+  - Fix: remove `*.json` files from the runtime plugin directory, leaving only plugin shared libraries (e.g. `libbandwidth-monitor-widget.so`).
+
+## Notes
+
+- Throughput is computed from deltas of Linux sysfs counters at `/sys/class/net/<iface>/statistics/{rx_bytes,tx_bytes}`.
+- Rates are shown as `B/s`, `KiB/s`, `MiB/s`, or `GiB/s`.
+- The first sample after selecting an interface is a baseline and displays `--`.
