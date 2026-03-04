@@ -28,6 +28,3 @@ set_target_properties(bandwidth-monitor-widget PROPERTIES
 install(TARGETS bandwidth-monitor-widget
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/dashboard/plugins
 )
-install(FILES bandwidth-monitor.json
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/dashboard/plugins
-)

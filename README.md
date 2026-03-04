@@ -58,11 +58,18 @@ build/plugins/
 ## Install / Usage
 
 1. Build the plugin.
-2. Copy the resulting shared library into Dashboard's runtime plugin directory (next to the Dashboard binary):
+2. Copy **only** the resulting shared library into Dashboard's runtime plugin directory (next to the Dashboard binary):
    - Linux: `.../dashboard/plugins/libbandwidth-monitor-widget.so`
+   - Do **not** copy `bandwidth-monitor.json` into the runtime plugin directory.
 3. Launch Dashboard.
 4. Open **Add Widget** → choose **Bandwidth Monitor**.
 5. Select a network interface from the dropdown.
+
+## Troubleshooting
+
+- Error: `Failed to load plugin ... bandwidth-monitor.json is not an ELF object (file too small)`
+  - Cause: a stray `*.json` file was placed in `dashboard/plugins` and the loader attempted to open it as a shared library.
+  - Fix: remove `*.json` files from the runtime plugin directory, leaving only plugin shared libraries (e.g. `libbandwidth-monitor-widget.so`).
 
 ## Notes
 
