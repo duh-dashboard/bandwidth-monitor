@@ -73,6 +73,6 @@ build/plugins/
 
 ## Notes
 
-- Throughput is computed from deltas of `/proc/net/dev` counters on Linux.
+- Throughput is computed from deltas of Linux sysfs counters at `/sys/class/net/<iface>/statistics/{rx_bytes,tx_bytes}`.
 - Rates are shown as `B/s`, `KiB/s`, `MiB/s`, or `GiB/s`.
 - The first sample after selecting an interface is a baseline and displays `--`.
