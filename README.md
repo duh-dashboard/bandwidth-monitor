@@ -27,11 +27,11 @@ Dashboard widget plugin for real-time network bandwidth monitoring.
 
 ## Build
 
-This plugin expects the Dashboard widget SDK (`widget-sdk`) and links against its CMake target (`dashboard-sdk`).
+This plugin expects the Dashboard widget SDK target (`widget-sdk`).
 
 ### Option A: Build as part of Dashboard (recommended)
 
-Add this repo to your Dashboard tree and include it from parent CMake, ensuring `dashboard-sdk` is already available.
+Add this repo to your Dashboard tree and include it from parent CMake, ensuring `widget-sdk` is already available.
 
 ### Option B: Standalone build against local SDK
 
