@@ -31,7 +31,7 @@ Linux build deps (Debian/Ubuntu):
 
 ```bash
 sudo apt update
-sudo apt install -y cmake ninja-build qt6-base-dev libxkbcommon-dev libxkbcommon-x11-dev
+sudo apt install -y cmake ninja-build qt6-base-dev libxkbcommon-dev libxkbcommon-x11-dev libvulkan-dev
 ```
 
 This plugin expects the Dashboard widget SDK target (`widget-sdk`).
