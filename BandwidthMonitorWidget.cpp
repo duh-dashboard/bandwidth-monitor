@@ -115,8 +115,8 @@ public:
         scanInterfaces();
 
 #if defined(Q_OS_LINUX)
-        connect(interfaceBox_, &QComboBox::currentTextChanged, this, [this](const QString& text) {
-            selectedInterface_ = text;
+        connect(interfaceBox_, qOverload<int>(&QComboBox::currentIndexChanged), this, [this](int) {
+            selectedInterface_ = interfaceBox_->currentData().toString();
             lastSample_.reset();
             emit selectedInterfaceChanged(selectedInterface_);
             updateReadings();
@@ -178,9 +178,6 @@ private:
 
         interfaceBox_->setCurrentIndex(idx);
         selectedInterface_ = interfaceBox_->currentData().toString();
-        if (selectedInterface_.isEmpty()) {
-            selectedInterface_ = interfaceBox_->currentText();
-        }
 
         statusLabel_->setText(QString("Sampling %1 every second").arg(interfaceBox_->currentText()));
     }
