@@ -13,7 +13,7 @@ set(DASHBOARD_WIDGET_SDK_DIR "" CACHE PATH "Path to dashboard/widget-sdk")
 
 if(NOT TARGET dashboard-sdk)
     if(DASHBOARD_WIDGET_SDK_DIR)
-        add_subdirectory(${DASHBOARD_WIDGET_SDK_DIR} dashboard-widget-sdk)
+        add_subdirectory(${DASHBOARD_WIDGET_SDK_DIR} widget-sdk)
     else()
         message(FATAL_ERROR
             "dashboard-sdk target not found. Either build this repo as part of Dashboard, "
