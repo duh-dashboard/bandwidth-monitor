@@ -27,6 +27,13 @@ Dashboard widget plugin for real-time network bandwidth monitoring.
 
 ## Build
 
+Linux build deps (Debian/Ubuntu):
+
+```bash
+sudo apt update
+sudo apt install -y cmake ninja-build qt6-base-dev libxkbcommon-dev libxkbcommon-x11-dev
+```
+
 This plugin expects the Dashboard widget SDK target (`widget-sdk`).
 
 ### Option A: Build as part of Dashboard (recommended)
