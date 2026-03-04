@@ -33,18 +33,19 @@ This plugin expects the Dashboard widget SDK target (`widget-sdk`).
 
 Add this repo to your Dashboard tree and include it from parent CMake, ensuring `widget-sdk` is already available.
 
-### Option B: Standalone build against local SDK
+### Option B: Standalone build (with discoverable `widget-sdk` package)
 
 ```bash
-cmake -S . -B build \
-  -DDASHBOARD_WIDGET_SDK_DIR=/path/to/dashboard/widget-sdk
+cmake -S . -B build
 cmake --build build --parallel
 ```
+
+If `widget-sdk` is not installed in a default CMake search location, provide its prefix via `CMAKE_PREFIX_PATH`.
 
 The plugin output is written to:
 
 ```text
-build/dashboard/plugins/
+build/plugins/
 ```
 
 ## Install / Usage
